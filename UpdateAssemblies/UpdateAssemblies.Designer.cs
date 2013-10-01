@@ -52,7 +52,6 @@
             this.SelectProject.Name = "SelectProject";
             this.SelectProject.Size = new System.Drawing.Size(260, 21);
             this.SelectProject.TabIndex = 1;
-            this.SelectProject.SelectedIndexChanged += new System.EventHandler(this.SelectProject_SelectedIndexChanged);
             // 
             // PathTextBox
             // 
