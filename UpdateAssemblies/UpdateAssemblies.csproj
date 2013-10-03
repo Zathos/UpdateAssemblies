@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileRepository.cs" />
-    <Compile Include="ProjectInfo.cs" />
+    <Compile Include="Project.cs" />
     <Compile Include="UpdateAssemblies.cs">
       <SubType>Form</SubType>
     </Compile>

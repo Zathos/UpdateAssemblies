@@ -50,14 +50,15 @@
             this.SelectProject.FormattingEnabled = true;
             this.SelectProject.Location = new System.Drawing.Point(12, 12);
             this.SelectProject.Name = "SelectProject";
-            this.SelectProject.Size = new System.Drawing.Size(260, 21);
+            this.SelectProject.Size = new System.Drawing.Size(209, 21);
             this.SelectProject.TabIndex = 1;
+            this.SelectProject.SelectedIndexChanged += new System.EventHandler(this.SelectProject_SelectedIndexChanged);
             // 
             // PathTextBox
             // 
             this.PathTextBox.Location = new System.Drawing.Point(12, 39);
             this.PathTextBox.Name = "PathTextBox";
-            this.PathTextBox.Size = new System.Drawing.Size(260, 20);
+            this.PathTextBox.Size = new System.Drawing.Size(409, 20);
             this.PathTextBox.TabIndex = 2;
             // 
             // UpdateButton
@@ -70,16 +71,16 @@
             this.UpdateButton.UseVisualStyleBackColor = true;
             this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
-            // Form1
+            // UpdateAssemblies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 127);
+            this.ClientSize = new System.Drawing.Size(433, 127);
             this.Controls.Add(this.UpdateButton);
             this.Controls.Add(this.PathTextBox);
             this.Controls.Add(this.SelectProject);
             this.Controls.Add(this.PickPathButton);
-            this.Name = "Form1";
+            this.Name = "UpdateAssemblies";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

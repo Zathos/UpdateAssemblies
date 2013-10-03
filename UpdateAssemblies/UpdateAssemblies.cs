@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace UpdateAssemblies
@@ -19,49 +18,11 @@ namespace UpdateAssemblies
 
             _fileRepository = new FileRepository();
 
-            _projectList = _fileRepository.LoadProject();
+            _projectList = _fileRepository.GetProjectNames();
             foreach (string projectDir in _projectList)
             {
                 SelectProject.Items.Add(projectDir);
             }
-            SelectProject.Items.Add("New");
-        }
-
-        private void PickPathButton_Click(object sender, EventArgs e)
-        {
-            DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                PathTextBox.Text = folderBrowserDialog1.SelectedPath;
-            }
-        }
-
-        private void UpdateButton_Click(object sender, EventArgs e)
-        {
-
-
-            var projectName = SelectProject.Text;
-
-            //TODO if selectedProject is "New" - create a new entry (double check its not in the list)
-
-            //make sure we have a path
-            var pathText = PathTextBox.Text;
-            var projectDir = ParseProjectDirFromFullPath(pathText);
-            _fileRepository.AddProject(pathText, projectDir);
-
-            _fileRepository.CopyAssemblies(pathText, projectName);
-
-            //if (VerifyInputs(pathText, projectName)) return;
-
-            //if (SelectProject.SelectedItem as string == null)
-            //{
-            //    if (_projectList.Any(s => s.CompareTo(_projectList) == 0))
-            //    {
-            //        return;
-            //    }
-            //    _fileRepository.AddProject(projectName);
-            //}
-            //_fileRepository.CopyAssemblies(pathText, projectName);
         }
 
         private static string ParseProjectDirFromFullPath(string pathText)
@@ -86,7 +47,37 @@ namespace UpdateAssemblies
             return retVal;
         }
 
+        private void PickPathButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                PathTextBox.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void SelectProject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var comboBox = (ComboBox) sender;
+            var itemText = comboBox.SelectedItem;
+
+            Project project = _fileRepository.FindProjectByDirName(itemText);
+
+            PathTextBox.Text = (project != null) ? project.Path : string.Empty;
+        }
+
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            var pathText = PathTextBox.Text;
+
+            var project = _fileRepository.FindOrCreateProject(pathText);
+
+            _fileRepository.CopyAssemblies(project);
+
+            PathTextBox.Text = String.Empty;
+        }
+
         private readonly FileRepository _fileRepository;
-        private readonly List<string> _projectList;
+        private readonly IList<string> _projectList;
     }
 }
