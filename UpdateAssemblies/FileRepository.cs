@@ -56,7 +56,9 @@ namespace UpdateAssemblies
         /// <param name="project">The project.</param>
         public void CopyAssemblies(Project project)
         {
-            //TODO
+            var sourceFiles = project.Path + "\\bin\\Debug\\" + project.ProjectDir + "*.*";
+            var destPath = project.Path + "\\..\\..\\..\\..\\Assemblies";
+            File.Copy(sourceFiles, destPath, true);
         }
 
         /// <summary>
