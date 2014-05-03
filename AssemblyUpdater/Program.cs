@@ -16,6 +16,10 @@ namespace AssemblyUpdater
         {
             //TODO create a file Io repository and pass into AssemblyUpdaterForm
 
+
+            var profileRepository = new ProfileXmlRepository();
+            var processModel = new ProcessModel();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new AssemblyUpdaterForm());

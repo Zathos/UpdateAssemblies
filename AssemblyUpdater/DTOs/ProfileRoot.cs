@@ -12,7 +12,15 @@ namespace AssemblyUpdater.DTOs
 
         public Profile GetProfileByName(string profileName)
         {
-            return Profile.FirstOrDefault(x => x.Name == profileName);
+            foreach (var profile in Profiles)
+            {
+                if (profile.Name == profileName)
+                {
+                    return profile;
+                }
+            }
+            return null;
+            //return Profile.FirstOrDefault(x => x.Name == profileName);
         }
 
     }

@@ -21,5 +21,11 @@ namespace AssemblyUpdater
         {
             Close();
         }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var editProfile = new EditProfileForm();
+            editProfile.ShowDialog();
+        }
     }
 }

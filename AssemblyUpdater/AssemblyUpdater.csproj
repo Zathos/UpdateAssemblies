@@ -58,6 +58,8 @@
     <Compile Include="EditProfileForm.Designer.cs">
       <DependentUpon>EditProfileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProcessModel.cs" />
+    <Compile Include="ProfileXmlRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AssemblyUpdaterForm.resx">

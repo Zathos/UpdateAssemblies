@@ -8,6 +8,7 @@ namespace AssemblyUpdater.DTOs
 {
     public class Profile
     {
+        public int Id;
         public string Name;
         public string SourcePath;
         public string DestinationPath;
