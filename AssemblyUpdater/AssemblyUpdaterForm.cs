@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using AssemblyUpdater.DTOs;
 
@@ -118,7 +119,15 @@ namespace AssemblyUpdater
 
         private void ExecuteButtonClick(object sender, EventArgs e)
         {
-            //TODO 
+            var profile = _processModel.GetProfileByName(_selectedProfileName);
+
+            foreach (string fileName in profile.FileNames)
+            {
+                var fullSourcePath = string.Format("{0}\\{1}", profile.SourcePath, fileName);
+                var fullDestinationPath = string.Format("{0}\\{1}", profile.DestinationPath, fileName);
+
+                File.Copy(fullSourcePath, fullDestinationPath);
+            }
         }
     }
 }
