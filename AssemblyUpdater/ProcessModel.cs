@@ -1,31 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using AssemblyUpdater.DTOs;
 
 namespace AssemblyUpdater
 {
     public class ProcessModel
     {
-        public ProfileRoot _profileRoot;
-
-        private Profile GetNewProfile()
+        public ProcessModel(ProfileXmlRepository profileRepository)
         {
-            var profile = new Profile();
-            profile.Id = _profileRoot.Profiles.Count;
-            return profile;
+            _profileRepository = profileRepository;
+            LoadProfiles();
         }
 
-        void LoadProfiles()
+        public Profile GetNewProfile()
         {
-
+            return new Profile {Id = _profileRoot.Profiles.Count};
         }
 
-        void SaveProfiles()
+        public Profile GetProfileByName(string profileName)
         {
+            return _profileRoot.Profiles.FirstOrDefault(x => x.Name == profileName);
+        }
 
+        public string[] GetProfilesAsComboBoxItems()
+        {
+            return _profileRoot.Profiles.Select(x => x.Name).ToArray();
+        }
+
+        public void LoadProfiles()
+        {
+            _profileRoot = _profileRepository.LoadProfiles();
+        }
+
+        public void SaveProfiles(Profile profile)
+        {
+            if (GetProfileByName(profile.Name) == null)
+            {
+                _profileRoot.Profiles.Add(profile);
+            }
+
+            _profileRepository.SaveProfiles(_profileRoot);
+        }
+
+        private readonly ProfileXmlRepository _profileRepository;
+        private ProfileRoot _profileRoot;
+
+        public void RemoveProfile(string profileName)
+        {
+            var profile = GetProfileByName(profileName);
+            _profileRoot.Profiles.Remove(profile);
+            _profileRepository.SaveProfiles(_profileRoot);
         }
     }
 }

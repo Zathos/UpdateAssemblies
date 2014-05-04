@@ -1,4 +1,6 @@
-﻿namespace AssemblyUpdater
+﻿using System.Security.AccessControl;
+
+namespace AssemblyUpdater
 {
     partial class AssemblyUpdaterForm
     {
@@ -55,6 +57,7 @@
             this.ProfilesDropDownList.Name = "ProfilesDropDownList";
             this.ProfilesDropDownList.Size = new System.Drawing.Size(237, 21);
             this.ProfilesDropDownList.TabIndex = 0;
+            this.ProfilesDropDownList.SelectedValueChanged += new System.EventHandler(this.ProfilesDropDownListSelectedValueChanged);
             // 
             // ExecuteButton
             // 
@@ -64,6 +67,7 @@
             this.ExecuteButton.TabIndex = 1;
             this.ExecuteButton.Text = "Execute";
             this.ExecuteButton.UseVisualStyleBackColor = true;
+            this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButtonClick);
             // 
             // EditProfileButton
             // 
@@ -73,6 +77,7 @@
             this.EditProfileButton.TabIndex = 2;
             this.EditProfileButton.Text = "Edit";
             this.EditProfileButton.UseVisualStyleBackColor = true;
+            this.EditProfileButton.Click += new System.EventHandler(this.EditProfileButtonClick);
             // 
             // RemoveProfileButton
             // 
@@ -82,6 +87,7 @@
             this.RemoveProfileButton.TabIndex = 3;
             this.RemoveProfileButton.Text = "Remove";
             this.RemoveProfileButton.UseVisualStyleBackColor = true;
+            this.RemoveProfileButton.Click += new System.EventHandler(this.RemoveProfileButtonClick);
             // 
             // label2
             // 
@@ -171,7 +177,7 @@
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "&Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItemClick);
             // 
             // profileToolStripMenuItem
             // 
@@ -184,9 +190,9 @@
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.addToolStripMenuItem.Text = "&Add";
-            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.AddToolStripMenuItemClick);
             // 
             // AssemblyUpdaterForm
             // 
