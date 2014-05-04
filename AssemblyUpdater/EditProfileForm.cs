@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using AssemblyUpdater.DTOs;
@@ -11,15 +12,30 @@ namespace AssemblyUpdater
         {
             _processModel = processModel;
             _profile = profile;
+            
             InitializeComponent();
-        }
 
-        private void CheckForPendingChangesOnClose()
-        {
-            if (_pendingChanges)
+            _updatedProfile = new Profile{FileNames = new List<string>()};
+
+            NameTextBox.Text = _profile.Name;
+            SourceTextBox.Text = _profile.SourcePath;
+            DestinationTextBox.Text = _profile.DestinationPath;
+            
+            if (_profile.FileNames.Count == 0)
             {
-                MessageBox.Show("Do you want to save changes to profile before closing?", "Save Pending Changes", MessageBoxButtons.YesNo);
+                FileListLabel.Text = "No files in this profile";
             }
+            else
+            {
+                FileListLabel.Text = string.Empty;
+                foreach (string fileName in _profile.FileNames)
+                {
+                    FileListLabel.Text += string.Format("{0}\n", fileName);
+
+                    _updatedProfile.FileNames.Add(fileName);
+                }
+            }
+            _pendingChanges = false;
         }
 
         private string GetPath()
@@ -27,15 +43,20 @@ namespace AssemblyUpdater
             return folderBrowserDialog.ShowDialog() == DialogResult.OK ? folderBrowserDialog.SelectedPath : null;
         }
 
-        private void SaveProfile(Profile profile)
+        private void SaveProfile()
         {
-            _processModel.SaveProfiles(profile);
+            _profile.Name = _updatedProfile.Name;
+            _profile.SourcePath = _updatedProfile.SourcePath;
+            _profile.DestinationPath = _updatedProfile.DestinationPath;
+            _profile.FileNames = _updatedProfile.FileNames.Select(x => x).ToList();
+
+            _processModel.SaveProfiles(_profile);
             _pendingChanges = false;
         }
 
         private void CloseToolStripMenuItemClick(object sender, EventArgs e)
         {
-            CheckForPendingChangesOnClose();
+            Close();
         }
 
         private void DestinationBrowserButtonClick(object sender, EventArgs e)
@@ -50,39 +71,50 @@ namespace AssemblyUpdater
         private void DestinationTextBoxTextChanged(object sender, EventArgs e)
         {
             _pendingChanges = true;
-            _profile.DestinationPath = DestinationTextBox.Text;
+            _updatedProfile.DestinationPath = DestinationTextBox.Text;
         }
 
         private void EditProfileFormClosing(object sender, FormClosingEventArgs e)
         {
-            CheckForPendingChangesOnClose();
+            if (!_pendingChanges)
+            {
+                return;
+            }
+
+            var saveChanges = MessageBox.Show("Do you want to save changes to profile before closing?", "Save Pending Changes", MessageBoxButtons.YesNo);
+            if (saveChanges == DialogResult.Yes)
+            {
+                SaveProfile();
+            }
         }
 
         private void FileSelectionButtonClick(object sender, EventArgs e)
         {
             openFileDialog.Multiselect = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
             {
-                _pendingChanges = true;
-                _profile.FileNames = openFileDialog.SafeFileNames.ToList();
+                return;
+            }
 
-                FileListLabel.Text = string.Empty;
-                foreach (string fileName in openFileDialog.SafeFileNames)
-                {
-                    FileListLabel.Text += string.Format("{0}\n", fileName);
-                }
+            _pendingChanges = true;
+            _updatedProfile.FileNames = openFileDialog.SafeFileNames.ToList();
+
+            FileListLabel.Text = string.Empty;
+            foreach (string fileName in openFileDialog.SafeFileNames)
+            {
+                FileListLabel.Text += string.Format("{0}\n", fileName);
             }
         }
 
         private void NameTextBoxTextChanged(object sender, EventArgs e)
         {
             _pendingChanges = true;
-            _profile.Name = NameTextBox.Text;
+            _updatedProfile.Name = NameTextBox.Text;
         }
 
         private void SaveToolStripMenuItemClick(object sender, EventArgs e)
         {
-            SaveProfile(_profile);
+            SaveProfile();
         }
 
         private void SourceBrowserButtonClick(object sender, EventArgs e)
@@ -97,12 +129,12 @@ namespace AssemblyUpdater
         private void SourceTextBoxTextChanged(object sender, EventArgs e)
         {
             _pendingChanges = true;
-            _profile.SourcePath = SourceTextBox.Text;
+            _updatedProfile.SourcePath = SourceTextBox.Text;
         }
 
         private readonly ProcessModel _processModel;
-
         private readonly Profile _profile;
+        private readonly Profile _updatedProfile;
         private bool _pendingChanges;
     }
 }

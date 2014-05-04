@@ -13,15 +13,25 @@ namespace AssemblyUpdater
             InitializeComponent();
 
             ProfilesDropDownList.Items.AddRange(_processModel.GetProfilesAsComboBoxItems());
+            SetDropDownToFirstItemInList();
+        }
 
-            ProfilesDropDownList.Items.Add("testing1");
-            ProfilesDropDownList.Items.Add("testing2");
+        private void SetDropDownToFirstItemInList()
+        {
+            if (ProfilesDropDownList.Items.Count > 0)
+            {
+                ProfilesDropDownList.Text = ProfilesDropDownList.Items[0].ToString();
+            }
         }
 
         private void ShowEditProfileForm(Profile profile)
         {
             var editProfile = new EditProfileForm(_processModel, profile);
             editProfile.ShowDialog();
+
+            ProfilesDropDownList.Items.Clear();
+            ProfilesDropDownList.Items.AddRange(_processModel.GetProfilesAsComboBoxItems());
+            ProfilesDropDownList.Text = profile.Name;
         }
 
         private void AddToolStripMenuItemClick(object sender, EventArgs e)
@@ -50,10 +60,10 @@ namespace AssemblyUpdater
         private void ProfilesDropDownListSelectedValueChanged(object sender, EventArgs e)
         {
             _selectedProfileName = ProfilesDropDownList.Text;
-            UpdateProfileDetails();
+            UpdateProfileDetailsDisplay();
         }
 
-        private void UpdateProfileDetails()
+        private void UpdateProfileDetailsDisplay()
         {
             var profile = _processModel.GetProfileByName(_selectedProfileName);
             if (profile != null)
@@ -88,7 +98,7 @@ namespace AssemblyUpdater
 
         private void RemoveProfileButtonClick(object sender, EventArgs e)
         {
-            if (_selectedProfileName == null)
+            if (string.IsNullOrEmpty(_selectedProfileName))
             {
                 return;
             }
@@ -100,7 +110,10 @@ namespace AssemblyUpdater
             {
                 _processModel.RemoveProfile(_selectedProfileName);
                 ProfilesDropDownList.Items.Remove(_selectedProfileName);
+                SetDropDownToFirstItemInList();
             }
+
+            _selectedProfileName = ProfilesDropDownList.Text;
         }
 
         private void ExecuteButtonClick(object sender, EventArgs e)

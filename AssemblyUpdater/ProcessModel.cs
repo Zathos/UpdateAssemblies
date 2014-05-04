@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AssemblyUpdater.DTOs;
 
 namespace AssemblyUpdater
@@ -13,7 +14,11 @@ namespace AssemblyUpdater
 
         public Profile GetNewProfile()
         {
-            return new Profile {Id = _profileRoot.Profiles.Count};
+            return new Profile
+                       {
+                           Id = _profileRoot.Profiles.Count,
+                           FileNames = new List<string>(),
+                       };
         }
 
         public Profile GetProfileByName(string profileName)
@@ -21,7 +26,7 @@ namespace AssemblyUpdater
             return _profileRoot.Profiles.FirstOrDefault(x => x.Name == profileName);
         }
 
-        public string[] GetProfilesAsComboBoxItems()
+        public object[] GetProfilesAsComboBoxItems()
         {
             return _profileRoot.Profiles.Select(x => x.Name).ToArray();
         }

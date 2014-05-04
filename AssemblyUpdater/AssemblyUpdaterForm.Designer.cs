@@ -52,6 +52,7 @@ namespace AssemblyUpdater
             // 
             // ProfilesDropDownList
             // 
+            this.ProfilesDropDownList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ProfilesDropDownList.FormattingEnabled = true;
             this.ProfilesDropDownList.Location = new System.Drawing.Point(12, 27);
             this.ProfilesDropDownList.Name = "ProfilesDropDownList";
@@ -214,6 +215,7 @@ namespace AssemblyUpdater
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AssemblyUpdaterForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Assembly Updater";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
