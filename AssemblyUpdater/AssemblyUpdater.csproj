@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AssemblyIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -93,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Art\AssemblyIcon.ico" />
+    <Content Include="AssemblyIcon.ico" />
+    <Content Include="favicon%281%29.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />

@@ -91,6 +91,7 @@ namespace AssemblyUpdater
         private void FileSelectionButtonClick(object sender, EventArgs e)
         {
             openFileDialog.Multiselect = true;
+            openFileDialog.InitialDirectory = _updatedProfile.SourcePath;
             if (openFileDialog.ShowDialog() != DialogResult.OK)
             {
                 return;

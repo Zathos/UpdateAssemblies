@@ -119,6 +119,8 @@ namespace AssemblyUpdater
 
         private void ExecuteButtonClick(object sender, EventArgs e)
         {
+            var showReport = false;
+            var errors = "Errors:\n";
             var profile = _processModel.GetProfileByName(_selectedProfileName);
 
             foreach (string fileName in profile.FileNames)
@@ -126,7 +128,20 @@ namespace AssemblyUpdater
                 var fullSourcePath = string.Format("{0}\\{1}", profile.SourcePath, fileName);
                 var fullDestinationPath = string.Format("{0}\\{1}", profile.DestinationPath, fileName);
 
-                File.Copy(fullSourcePath, fullDestinationPath);
+                try
+                {
+                    File.Copy(fullSourcePath, fullDestinationPath, true);
+                }
+                catch (Exception ex)
+                {
+                    errors += string.Format("{0}\n", ex.Message);
+                    showReport = true;
+                }
+            }
+
+            if (showReport)
+            {
+                MessageBox.Show(errors);
             }
         }
     }
