@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.SourceOpenLabel = new System.Windows.Forms.Label();
+            this.DestinationOpenLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SourceTextBox = new System.Windows.Forms.TextBox();
             this.DestinationTextBox = new System.Windows.Forms.TextBox();
@@ -65,23 +65,25 @@
             this.NameTextBox.TabIndex = 1;
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBoxTextChanged);
             // 
-            // label2
+            // SourceOpenLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Source";
+            this.SourceOpenLabel.AutoSize = true;
+            this.SourceOpenLabel.Location = new System.Drawing.Point(13, 63);
+            this.SourceOpenLabel.Name = "SourceOpenLabel";
+            this.SourceOpenLabel.Size = new System.Drawing.Size(41, 13);
+            this.SourceOpenLabel.TabIndex = 2;
+            this.SourceOpenLabel.Text = "Source";
+            this.SourceOpenLabel.Click += new System.EventHandler(this.SourceOpenLabelClick);
             // 
-            // label3
+            // DestinationOpenLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 91);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Destination";
+            this.DestinationOpenLabel.AutoSize = true;
+            this.DestinationOpenLabel.Location = new System.Drawing.Point(13, 91);
+            this.DestinationOpenLabel.Name = "DestinationOpenLabel";
+            this.DestinationOpenLabel.Size = new System.Drawing.Size(60, 13);
+            this.DestinationOpenLabel.TabIndex = 3;
+            this.DestinationOpenLabel.Text = "Destination";
+            this.DestinationOpenLabel.Click += new System.EventHandler(this.DestinationOpenLabelClick);
             // 
             // label4
             // 
@@ -196,8 +198,8 @@
             this.Controls.Add(this.DestinationTextBox);
             this.Controls.Add(this.SourceTextBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.DestinationOpenLabel);
+            this.Controls.Add(this.SourceOpenLabel);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip);
@@ -220,8 +222,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox NameTextBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label SourceOpenLabel;
+        private System.Windows.Forms.Label DestinationOpenLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox SourceTextBox;
         private System.Windows.Forms.TextBox DestinationTextBox;

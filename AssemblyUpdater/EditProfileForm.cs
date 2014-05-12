@@ -137,5 +137,36 @@ namespace AssemblyUpdater
         private readonly Profile _profile;
         private readonly Profile _updatedProfile;
         private bool _pendingChanges;
+
+        private void SourceOpenLabelClick(object sender, EventArgs e)
+        {
+            var process = new System.Diagnostics.Process
+            {
+                StartInfo =
+                {
+                    UseShellExecute = true,
+                    FileName = SourceTextBox.Text,
+                    Arguments = @" "
+                }
+            };
+
+            process.Start();
+        }
+
+        private void DestinationOpenLabelClick(object sender, EventArgs e)
+        {
+
+            var process = new System.Diagnostics.Process
+            {
+                StartInfo =
+                {
+                    UseShellExecute = true,
+                    FileName = DestinationTextBox.Text,
+                    Arguments = @" "
+                }
+            };
+
+            process.Start();
+        }
     }
 }

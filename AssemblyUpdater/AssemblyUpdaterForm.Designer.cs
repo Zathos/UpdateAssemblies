@@ -35,11 +35,11 @@ namespace AssemblyUpdater
             this.ExecuteButton = new System.Windows.Forms.Button();
             this.EditProfileButton = new System.Windows.Forms.Button();
             this.RemoveProfileButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.SourceOpenPathLabel = new System.Windows.Forms.Label();
+            this.DestinationOpenPathLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.ProfileSorcePathLabel = new System.Windows.Forms.Label();
+            this.SourcePathLabel = new System.Windows.Forms.Label();
             this.DestinationPathLabel = new System.Windows.Forms.Label();
             this.FileListLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -90,23 +90,25 @@ namespace AssemblyUpdater
             this.RemoveProfileButton.UseVisualStyleBackColor = true;
             this.RemoveProfileButton.Click += new System.EventHandler(this.RemoveProfileButtonClick);
             // 
-            // label2
+            // SourceOpenPathLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 115);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Sorce Path:";
+            this.SourceOpenPathLabel.AutoSize = true;
+            this.SourceOpenPathLabel.Location = new System.Drawing.Point(12, 115);
+            this.SourceOpenPathLabel.Name = "SourceOpenPathLabel";
+            this.SourceOpenPathLabel.Size = new System.Drawing.Size(63, 13);
+            this.SourceOpenPathLabel.TabIndex = 4;
+            this.SourceOpenPathLabel.Text = "Sorce Path:";
+            this.SourceOpenPathLabel.Click += new System.EventHandler(this.SourceOpenPathLabelClick);
             // 
-            // label3
+            // DestinationOpenPathLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 137);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Destination Path:";
+            this.DestinationOpenPathLabel.AutoSize = true;
+            this.DestinationOpenPathLabel.Location = new System.Drawing.Point(12, 137);
+            this.DestinationOpenPathLabel.Name = "DestinationOpenPathLabel";
+            this.DestinationOpenPathLabel.Size = new System.Drawing.Size(88, 13);
+            this.DestinationOpenPathLabel.TabIndex = 5;
+            this.DestinationOpenPathLabel.Text = "Destination Path:";
+            this.DestinationOpenPathLabel.Click += new System.EventHandler(this.DestinationOpenPathLabelClick);
             // 
             // label4
             // 
@@ -127,14 +129,14 @@ namespace AssemblyUpdater
             this.label1.TabIndex = 7;
             this.label1.Text = "Profile Details";
             // 
-            // ProfileSorcePathLabel
+            // SourcePathLabel
             // 
-            this.ProfileSorcePathLabel.AutoSize = true;
-            this.ProfileSorcePathLabel.Location = new System.Drawing.Point(98, 115);
-            this.ProfileSorcePathLabel.Name = "ProfileSorcePathLabel";
-            this.ProfileSorcePathLabel.Size = new System.Drawing.Size(95, 13);
-            this.ProfileSorcePathLabel.TabIndex = 8;
-            this.ProfileSorcePathLabel.Text = "No profile selected";
+            this.SourcePathLabel.AutoSize = true;
+            this.SourcePathLabel.Location = new System.Drawing.Point(98, 115);
+            this.SourcePathLabel.Name = "SourcePathLabel";
+            this.SourcePathLabel.Size = new System.Drawing.Size(95, 13);
+            this.SourcePathLabel.TabIndex = 8;
+            this.SourcePathLabel.Text = "No profile selected";
             // 
             // DestinationPathLabel
             // 
@@ -202,11 +204,11 @@ namespace AssemblyUpdater
             this.ClientSize = new System.Drawing.Size(259, 237);
             this.Controls.Add(this.FileListLabel);
             this.Controls.Add(this.DestinationPathLabel);
-            this.Controls.Add(this.ProfileSorcePathLabel);
+            this.Controls.Add(this.SourcePathLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.DestinationOpenPathLabel);
+            this.Controls.Add(this.SourceOpenPathLabel);
             this.Controls.Add(this.RemoveProfileButton);
             this.Controls.Add(this.EditProfileButton);
             this.Controls.Add(this.ExecuteButton);
@@ -230,11 +232,11 @@ namespace AssemblyUpdater
         private System.Windows.Forms.Button ExecuteButton;
         private System.Windows.Forms.Button EditProfileButton;
         private System.Windows.Forms.Button RemoveProfileButton;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label SourceOpenPathLabel;
+        private System.Windows.Forms.Label DestinationOpenPathLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label ProfileSorcePathLabel;
+        private System.Windows.Forms.Label SourcePathLabel;
         private System.Windows.Forms.Label DestinationPathLabel;
         private System.Windows.Forms.Label FileListLabel;
         private System.Windows.Forms.MenuStrip menuStrip1;
